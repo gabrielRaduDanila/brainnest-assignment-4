@@ -37,7 +37,6 @@ btns.forEach(function (btn) {
         }
 
         if (select.contains("operator")) {
-            
             numberArray.push(firstNumber);
             firstArrayInput = [];
             if (numberArray.length == 2) {
@@ -46,9 +45,12 @@ btns.forEach(function (btn) {
                 numberArray.push(result);
             }
             operation = currentSelection;
+            if (result !== 0) {
+                displayValue = result + operation;
+            }
         }
 
-        if (select.contains("equal")){
+        if (select.contains("equal")) {
             console.log(numberArray);
             displayValue = result;
             numberArray = [];
