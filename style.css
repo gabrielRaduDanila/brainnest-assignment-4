@@ -22,13 +22,17 @@ main{
     height: 90px;
     background-color: white;
     margin-top: 10px;
-    /* font-size: 3.5em; */
-    text-align: right;
+    
+   
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    overflow: hidden;
-    font-size: clamp(14px, 4rem, 35px);
+    
+}
+
+p{ 
+    text-align: right;
+    font-size: 2.5em;
 }
 
 .buttons{
@@ -48,7 +52,7 @@ main{
     font-size: 2em;
 }
 
-.clear, .sign, .percent{
+.clear, .sign, .del{
     background-color: dodgerblue;
 }
 
