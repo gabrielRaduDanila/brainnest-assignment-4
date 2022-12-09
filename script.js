@@ -1,11 +1,8 @@
 const btns = document.querySelectorAll(".btn");
 let firstArrayInput = [];
 let firstNumber;
-let secondArrayInput = [];
-let secondNumber;
 let numberArray = new Array();
 let result = 0;
-let operateArray = [];
 let operation;
 
 const display = document.getElementById("display-text")
@@ -28,6 +25,7 @@ btns.forEach(function (btn) {
         console.log(currentSelection);
 
         if (select.contains("operand" || "dot")) {
+
             firstArrayInput.push(btn.textContent);
             if (firstArrayInput.indexOf(".") !== firstArrayInput.lastIndexOf(".")) {
                 firstArrayInput.pop();
@@ -37,10 +35,13 @@ btns.forEach(function (btn) {
         }
 
         if (select.contains("operator")) {
+            console.log(operation);
+            console.log(typeof(operation));
             numberArray.push(firstNumber);
             firstArrayInput = [];
             if (numberArray.length == 2) {
                 result = operate(operation, numberArray[0], numberArray[1]);
+                result = Number(result.toFixed(3));
                 numberArray = [];
                 numberArray.push(result);
             }
@@ -50,17 +51,24 @@ btns.forEach(function (btn) {
             }
         }
 
+        if (select.contains("clear")) {
+             firstArrayInput = [];
+             displayValue="";
+             numberArray = [];
+             result = 0;
+        }
+
         if (select.contains("equal")) {
             console.log(numberArray);
             displayValue = result;
             numberArray = [];
             firstNumber = result;
         }
-
-        console.log(operateArray);
+    
         console.log(result);
+        console.log(firstArrayInput);
+        console.log(numberArray)
         showing(displayValue);
-
     })
 
 })
