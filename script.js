@@ -2,7 +2,7 @@ const btns = document.querySelectorAll(".btn");
 let firstArrayInput = [];
 let firstNumber;
 let numberArray = new Array();
-let result = 0;
+let result = null;
 let operation;
 
 const display = document.getElementById("display-text")
@@ -21,8 +21,9 @@ btns.forEach(function (btn) {
         const select = e.currentTarget.classList;
         let currentSelection = btn.textContent;
 
+
         displayValue += currentSelection;
-        console.log(currentSelection);
+        // console.log(currentSelection);
 
         if (select.contains("operand" || "dot")) {
 
@@ -35,43 +36,56 @@ btns.forEach(function (btn) {
         }
 
         if (select.contains("operator")) {
-            console.log(operation);
-            console.log(typeof(operation));
+            // console.log(operation);
             numberArray.push(firstNumber);
             firstArrayInput = [];
+
             if (numberArray.length == 2) {
+                if (numberArray[0] == 0 && operation == "/") {
+                    displayValue = 'ERROR';
+                    result =null;
+                } else {
                 result = operate(operation, numberArray[0], numberArray[1]);
                 result = Number(result.toFixed(3));
                 numberArray = [];
                 numberArray.push(result);
+                }
             }
             operation = currentSelection;
-            if (result !== 0) {
+            if (result != null) {
                 displayValue = result + operation;
             }
+
         }
 
+        console.log(firstNumber)
+        console.log(numberArray)
+        console.log(operation)
         if (select.contains("clear")) {
-             firstArrayInput = [];
-             displayValue="";
-             numberArray = [];
-             result = 0;
+            clear();
         }
 
         if (select.contains("equal")) {
-            console.log(numberArray);
-            displayValue = result;
             numberArray = [];
             firstNumber = result;
         }
-    
-        console.log(result);
-        console.log(firstArrayInput);
-        console.log(numberArray)
-        showing(displayValue);
-    })
 
+        console.log(result);
+        // console.log(firstArrayInput);
+        // console.log(numberArray)
+        showing(displayValue);
+
+
+
+    })
 })
+
+function clear() {
+    firstArrayInput = [];
+    displayValue = "";
+    numberArray = [];
+    result = null;
+}
 
 function add(a, b) {
     return a + b;
@@ -101,5 +115,4 @@ function operate(operator, a, b) {
             return divide(a, b);
     }
 }
-
 
