@@ -12,18 +12,11 @@ function showing(a) {
     return display.innerText = a;
 }
 
-
-
-
 btns.forEach(function (btn) {
-    // console.log(btn);
     btn.addEventListener("click", function (e) {
         const select = e.currentTarget.classList;
         let currentSelection = btn.textContent;
-
-
         displayValue += currentSelection;
-        // console.log(currentSelection);
 
         if (select.contains("operand" || "dot")) {
 
@@ -36,31 +29,26 @@ btns.forEach(function (btn) {
         }
 
         if (select.contains("operator")) {
-            // console.log(operation);
             numberArray.push(firstNumber);
             firstArrayInput = [];
 
             if (numberArray.length == 2) {
-                if (numberArray[0] == 0 && operation == "/") {
-                    displayValue = 'ERROR';
-                    result =null;
+                if (firstNumber == 0 && operation == "/") {
+                    displayValue = 'ERROR ';
+                    result = null;
                 } else {
-                result = operate(operation, numberArray[0], numberArray[1]);
-                result = Number(result.toFixed(3));
-                numberArray = [];
-                numberArray.push(result);
+                    result = operate(operation, numberArray[0], numberArray[1]);
+                    result = Number(result.toFixed(3));
+                    numberArray = [];
+                    numberArray.push(result);
                 }
             }
             operation = currentSelection;
             if (result != null) {
                 displayValue = result + operation;
             }
-
         }
 
-        console.log(firstNumber)
-        console.log(numberArray)
-        console.log(operation)
         if (select.contains("clear")) {
             clear();
         }
@@ -68,15 +56,22 @@ btns.forEach(function (btn) {
         if (select.contains("equal")) {
             numberArray = [];
             firstNumber = result;
+            displayValue = displayValue.slice(0,-1);
         }
-
-        console.log(result);
-        // console.log(firstArrayInput);
-        // console.log(numberArray)
+       
+        if (select.contains("del")) {
+            if (displayValue.slice(-2,-1) == '+' || '-' || '/' || '*' || '='){
+                displayValue = displayValue.slice(0,-2);
+                operation = "";
+                numberArray.pop()
+                console.log(operation)
+            } else {
+            displayValue = displayValue.slice(0,-2);
+            firstNumber = Math.floor(firstNumber/10);
+            firstArrayInput.pop();
+           }
+        }
         showing(displayValue);
-
-
-
     })
 })
 
