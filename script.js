@@ -4,7 +4,7 @@ let firstNumber;
 let numberArray = new Array();
 let result = null;
 let operation;
-
+let currentSelection
 const display = document.getElementById("display-text")
 let displayValue = "";
 
@@ -56,23 +56,95 @@ btns.forEach(function (btn) {
         if (select.contains("equal")) {
             numberArray = [];
             firstNumber = result;
-            displayValue = displayValue.slice(0,-1);
+            displayValue = displayValue.slice(0, -1);
         }
-       
+
         if (select.contains("del")) {
-            if (displayValue.slice(-2,-1) == '+' || '-' || '/' || '*' || '='){
-                displayValue = displayValue.slice(0,-2);
+            if (displayValue.slice(-2, -1) == '+' || '-' || '/' || '*' || '=') {
+                displayValue = displayValue.slice(0, -2);
                 operation = "";
                 numberArray.pop()
                 console.log(operation)
             } else {
-            displayValue = displayValue.slice(0,-2);
-            firstNumber = Math.floor(firstNumber/10);
-            firstArrayInput.pop();
-           }
+                displayValue = displayValue.slice(0, -2);
+                firstNumber = Math.floor(firstNumber / 10);
+                firstArrayInput.pop();
+            }
         }
         showing(displayValue);
     })
+})
+
+let numbers = [`0`, `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `.`];
+let toOperate = [`+`, `-`, `*`, `/`];
+
+window.addEventListener("keyup", e => {
+    console.log(e);
+    let currentSelection = e.key;
+    if (numbers.includes(e.key) || toOperate.includes(e.key)) {
+        displayValue += currentSelection;
+    }
+    if (numbers.includes(e.key)) {
+        firstArrayInput.push(e.key);       
+        if (firstArrayInput.indexOf(".") !== firstArrayInput.lastIndexOf(".")) {
+            firstArrayInput.pop();
+        }
+        let x = firstArrayInput.toString();
+        firstNumber = Number(x.replace(/,/g, '')); 
+        console.log(numberArray)
+    }
+
+    if (toOperate.includes(e.key) || e.key === 'Enter') {
+        numberArray.push(firstNumber);
+        firstArrayInput = [];
+        console.log(numberArray)
+        if (numberArray.length == 2) {
+            if (firstNumber == 0 && operation == "/") {
+                displayValue = 'ERROR ';
+                result = null;
+            } else {
+                result = operate(operation, numberArray[0], numberArray[1]);
+                result = Number(result.toFixed(3));
+                numberArray = [];
+                numberArray.push(result);
+            }
+        }
+        operation = currentSelection;
+        if (result != null) {
+            displayValue = result + operation;
+        }
+    }
+    if (e.key === 'Escape') {
+        clear();
+    }
+    console.log(result)
+    if (e.key === 'Enter') {
+        numberArray = [];
+        firstNumber = result;
+        displayValue = displayValue.slice(0, -5); 
+    }
+    console.log(firstNumber);
+    console.log(operation)
+    console.log(displayValue.slice(-1))
+    if (e.key === 'Backspace') {
+        if (displayValue.slice(-1) == '+' || '-' || '/' || '*' || '=') {
+            displayValue = displayValue.slice(0, -1);
+            operation = "";
+            numberArray.pop()
+            console.log(operation)
+        } else {
+            firstArrayInput.pop();
+            displayValue = displayValue.slice(0, -1);
+            firstNumber = Number(displayValue);            
+        }
+        console.log(firstArrayInput);
+        console.log(firstNumber)
+        console.log(numberArray)
+    console.log(operation)
+
+    }
+    showing(displayValue);
+
 })
 
 function clear() {
