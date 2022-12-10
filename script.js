@@ -131,9 +131,6 @@ window.addEventListener("keyup", e => {
         displayValue = displayValue.slice(0, -1);
         firstNumber = Number(displayValue);
     }
-    console.log(firstArrayInput)
-    console.log(firstNumber)
-    showing(displayValue);
 
     showing(displayValue);
 
