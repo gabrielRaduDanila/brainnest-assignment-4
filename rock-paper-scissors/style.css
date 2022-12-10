@@ -1,0 +1,103 @@
+.game-div{
+    background-image: url("./pictures/rock-paper-scissors.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 70vw;
+    height: 80vh;
+    margin: auto;
+    margin-top: 10vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.display{
+    height: 40%;
+    width: 70%;
+    background-color: white;
+    border: 3px solid black;
+    border-radius: 10px;
+}
+
+.buttons{
+    height: 20%;
+    width: 70%;
+    border: 3px solid black;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+button{
+    height: 70px;
+    width: 30%;
+    font-size: 24px;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+
+button:hover{
+    cursor: pointer;
+    scale: 1.1;
+    font-size: 30px;
+    color: blue;
+}
+
+.rock{
+    background-image: url("./pictures/rock.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.paper{
+    background-image: url("./pictures/paper.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.scissors{
+    background-image: url("./pictures/scissors.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+p{
+    font-size: 1.6em;
+    text-align: center;
+}
+
+@media only screen and (max-width: 600px){
+    .game-div{
+        width: 100%;
+    }
+
+    .display{
+        width: 95%;
+        font-size: 16px;
+    }
+
+    .buttons{
+        height: auto;
+        width: 80%;
+        flex-direction: column;
+        gap: 10px;
+        border: 0ch;
+    }
+
+    button{
+        height: 50px;
+        width: 70%;
+    }
+
+    .rock, .paper, .scissors{
+        background-position: center;
+        background-size: 50%;
+    }
+
+    button:hover{
+        color:black;
+        scale: 1;
+    }
+}
