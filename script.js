@@ -58,14 +58,13 @@ btns.forEach(function (btn) {
 
         if (select.contains("del")) {
             if (displayValue.slice(-2, -1) == '+' || '-' || '/' || '*' || '=') {
-                displayValue = displayValue.slice(0, -2);
                 operation = "";
                 numberArray.pop();
-            } else {
-                displayValue = displayValue.slice(0, -2);
-                firstNumber = Math.floor(firstNumber / 10);
-                firstArrayInput.pop();
             }
+            displayValue = displayValue.slice(0, -2);
+            firstArrayInput.pop();
+            firstNumber = Number(displayValue);
+            firstArrayInput.pop();
         }
 
         showing(displayValue);
@@ -125,15 +124,12 @@ window.addEventListener("keyup", e => {
 
     if (e.key === 'Backspace') {
         if (displayValue.slice(-1) == '+' || '-' || '/' || '*' || '=') {
-            displayValue = displayValue.slice(0, -1);
             operation = "";
             numberArray.pop()
-            console.log(operation)
-        } else {
-            firstArrayInput.pop();
-            displayValue = displayValue.slice(0, -1);
-            firstNumber = Number(displayValue);
         }
+        firstArrayInput.pop();
+        displayValue = displayValue.slice(0, -1);
+        firstNumber = Number(displayValue);
     }
     console.log(firstArrayInput)
     console.log(firstNumber)
