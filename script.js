@@ -49,9 +49,6 @@ btns.forEach(function (btn) {
             }
         }
 
-        if (select.contains("clear")) {
-            clear();
-        }
 
         if (select.contains("equal")) {
             numberArray = [];
@@ -63,15 +60,20 @@ btns.forEach(function (btn) {
             if (displayValue.slice(-2, -1) == '+' || '-' || '/' || '*' || '=') {
                 displayValue = displayValue.slice(0, -2);
                 operation = "";
-                numberArray.pop()
-                console.log(operation)
+                numberArray.pop();
             } else {
                 displayValue = displayValue.slice(0, -2);
                 firstNumber = Math.floor(firstNumber / 10);
                 firstArrayInput.pop();
             }
         }
+
         showing(displayValue);
+
+        if (select.contains("clear")) {
+            clear();
+        }
+
     })
 })
 
@@ -85,12 +87,12 @@ window.addEventListener("keyup", e => {
         displayValue += currentSelection;
     }
     if (numbers.includes(e.key)) {
-        firstArrayInput.push(e.key);       
+        firstArrayInput.push(e.key);
         if (firstArrayInput.indexOf(".") !== firstArrayInput.lastIndexOf(".")) {
             firstArrayInput.pop();
         }
         let x = firstArrayInput.toString();
-        firstNumber = Number(x.replace(/,/g, '')); 
+        firstNumber = Number(x.replace(/,/g, ''));
         console.log(numberArray)
     }
 
@@ -114,18 +116,13 @@ window.addEventListener("keyup", e => {
             displayValue = result + operation;
         }
     }
-    if (e.key === 'Escape') {
-        clear();
-    }
-    console.log(result)
+
     if (e.key === 'Enter') {
         numberArray = [];
         firstNumber = result;
-        displayValue = displayValue.slice(0, -5); 
+        displayValue = displayValue.slice(0, -5);
     }
-    console.log(firstNumber);
-    console.log(operation)
-    console.log(displayValue.slice(-1))
+
     if (e.key === 'Backspace') {
         if (displayValue.slice(-1) == '+' || '-' || '/' || '*' || '=') {
             displayValue = displayValue.slice(0, -1);
@@ -135,15 +132,19 @@ window.addEventListener("keyup", e => {
         } else {
             firstArrayInput.pop();
             displayValue = displayValue.slice(0, -1);
-            firstNumber = Number(displayValue);            
+            firstNumber = Number(displayValue);
         }
-        console.log(firstArrayInput);
-        console.log(firstNumber)
-        console.log(numberArray)
-    console.log(operation)
-
     }
+    console.log(firstArrayInput)
+    console.log(firstNumber)
     showing(displayValue);
+
+    showing(displayValue);
+
+    if (e.key === 'Escape') {
+        clear();
+    }
+
 
 })
 
@@ -152,6 +153,7 @@ function clear() {
     displayValue = "";
     numberArray = [];
     result = null;
+    showing(0);
 }
 
 function add(a, b) {
